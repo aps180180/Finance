@@ -9,17 +9,17 @@ namespace Finance.Core.Responses
 {
     public class Response<TData>
     {
-        private const int DefaultStatusCode = 200;
+       
         private readonly int _code;
 
         //contrutor parameterless - 
         [JsonConstructor]
         public Response()
         {
-            _code = DefaultStatusCode;
+            _code = Configuration.DefaultStatusCode;
             
         }
-        public Response( TData? data, int code=DefaultStatusCode, string? message= null)
+        public Response( TData? data, int code= Configuration.DefaultStatusCode, string? message= null)
         {
             Data = data;
             Message = message;
