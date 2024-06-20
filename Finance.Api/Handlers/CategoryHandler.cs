@@ -22,12 +22,12 @@ namespace Finance.Api.Handlers
                 };
                 await context.Categories.AddAsync(category);
                 await context.SaveChangesAsync();
-                return new Response<Category>(category,201,"Categoria criada com sucesso!");
+                return new Response<Category?>(category,201,"Categoria criada com sucesso!");
             }
             catch 
             {
 
-                return new Response<Category>(null, 500, "Erro ao criar a categoria!");
+                return new Response<Category?>(null, 500, "Erro ao criar a categoria!");
             }
         }
 
@@ -38,7 +38,7 @@ namespace Finance.Api.Handlers
                 var category = await context.Categories
                 .FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);
                 if (category is null)
-                    return new Response<Category>(null, 404, "Categoria não encontrada!");
+                    return new Response<Category?>(null, 404, "Categoria não encontrada!");
                 context.Categories.Remove(category);
                 await context.SaveChangesAsync();
                 return new Response<Category?>(category, message: "Categoria excluida com sucesso!");
@@ -46,7 +46,7 @@ namespace Finance.Api.Handlers
             catch 
             {
 
-                return new Response<Category>(null, 500, "Erro ao excluir a categoria!");
+                return new Response<Category?>(null, 500, "Erro ao excluir a categoria!");
             }
 
         }
@@ -101,7 +101,7 @@ namespace Finance.Api.Handlers
                 var category = await context.Categories
                 .FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);
                 if (category is null)
-                    return new Response<Category>(null, 404, "Categoria não encontrada!");
+                    return new Response<Category?>(null, 404, "Categoria não encontrada!");
 
                 category.Title = request.Title;
                 category.Description = request.Description;
