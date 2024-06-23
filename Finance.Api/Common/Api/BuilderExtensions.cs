@@ -1,0 +1,74 @@
+﻿using Finance.Api.Data;
+using Finance.Api.Handlers;
+using Finance.Api.Models;
+using Finance.Core;
+using Finance.Core.Handlers;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace Finance.Api.Common.Api
+{
+    public static class BuilderExtensions
+    {
+        public static void AddConfiguration(this WebApplicationBuilder builder)
+        {
+            Configuration.ConnectionString = builder.Configuration.GetConnectionString("Default") ?? string.Empty;
+            Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl")?? string.Empty;
+            Configuration.FrontendUrl = builder.Configuration.GetValue<string>("FrontendUrl") ?? string.Empty;
+
+        }
+
+        public static void AddDocumentation(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(x =>
+            {
+                x.CustomSchemaIds(n => n.FullName);
+            });
+        }
+
+        public static void AddSecurity(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+                            .AddIdentityCookies();
+            builder.Services.AddAuthorization();
+        }
+
+        public static void AddDataContexts(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddDbContext<AppDbContext>(x =>
+            {
+                x.UseSqlServer(Configuration.ConnectionString);
+            });
+
+            builder.Services
+                .AddIdentityCore<User>()
+                .AddRoles<IdentityRole<long>>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddApiEndpoints();    
+
+        }
+
+        public static void AddServices(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddTransient<ICategoryHandler, CategoryHandler>();
+            builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();
+
+        }
+
+        public static void AddCrossOrigin(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddCors(options => options.AddPolicy(
+                ApiConfiguration.CorsPoliceName,
+                policy => policy.WithOrigins([
+                    Configuration.BackendUrl,
+                    Configuration.FrontendUrl
+                    ])
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                ));
+        }
+
+    }
+}

@@ -4,6 +4,7 @@ using Finance.Core.Models;
 using Finance.Core.Requests.Categories;
 using Finance.Core.Requests.Transactions;
 using Finance.Core.Responses;
+using System.Security.Claims;
 
 namespace Finance.Api.Endpoints.Transactions
 {
@@ -20,9 +21,9 @@ namespace Finance.Api.Endpoints.Transactions
 
         }
 
-        private static async Task<IResult> HandleAsync(ITransactionHandler handler, UpdateTransactionRequest request, long id)
+        private static async Task<IResult> HandleAsync(ClaimsPrincipal user,ITransactionHandler handler, UpdateTransactionRequest request, long id)
         {
-            request.UserId = "aps180180@gmail.com";
+            request.UserId = user.Identity?.Name ?? string.Empty;
             request.Id = id;
             var result = await handler.UpdateAsync(request);
             return result.IsSuccess

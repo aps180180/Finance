@@ -3,6 +3,7 @@ using Finance.Core.Handlers;
 using Finance.Core.Models;
 using Finance.Core.Requests.Categories;
 using Finance.Core.Responses;
+using System.Security.Claims;
 
 namespace Finance.Api.Endpoints.Categories
 {
@@ -19,11 +20,11 @@ namespace Finance.Api.Endpoints.Categories
 
         }
 
-        private static async Task<IResult> HandleAsync(ICategoryHandler handler,  long id)
+        private static async Task<IResult> HandleAsync(ClaimsPrincipal user, ICategoryHandler handler,  long id)
         {
             var request = new GetCategoryByIdRequest
             {
-                UserId = "aps180180@gmail.com",
+                UserId = user.Identity?.Name ?? string.Empty,
                 Id = id
             };
             

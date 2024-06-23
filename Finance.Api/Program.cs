@@ -1,54 +1,23 @@
-using Finance.Api.Data;
+using Finance.Api;
+using Finance.Api.Common.Api;
 using Finance.Api.Endpoints;
-using Finance.Api.Handlers;
-using Finance.Api.Models;
-using Finance.Core.Handlers;
-using Finance.Core.Models;
-using Finance.Core.Requests.Categories;
-using Finance.Core.Responses;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddEndpointsApiExplorer();//
-builder.Services.AddSwaggerGen(x =>
-{
-    x.CustomSchemaIds(n => n.FullName);
-}); //
-
-builder.Services
-    .AddAuthentication(IdentityConstants.ApplicationScheme)
-    .AddIdentityCookies();//
-builder.Services.AddAuthorization();//
-
-
-var connectionString = builder.Configuration.GetConnectionString("Default")?? string.Empty;
-builder.Services.AddDbContext<AppDbContext>(x =>
-{
-    x.UseSqlServer(connectionString);   
-});
-
-builder.Services
-    .AddIdentityCore<User>()
-    .AddRoles<IdentityRole<long>>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddApiEndpoints();   // 
-    
-
-
-builder.Services.AddTransient<ICategoryHandler,CategoryHandler>();//
-builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();//
+builder.AddConfiguration();// extension method
+builder.AddSecurity();// extension method
+builder.AddDataContexts();// extension method
+builder.AddCrossOrigin();// extension method
+builder.AddDocumentation();// extension method
+builder.AddServices();// extension method
 
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+    app.ConfigureDevEnvironment();// metodo de extensão
 
-app.UseAuthentication(); //
-app.UseAuthorization(); //
+app.UseCors(ApiConfiguration.CorsPoliceName);
+app.UseSecurity(); // metodo de extensão
 
-app.UseSwagger();//
-app.UseSwaggerUI();//
-app.MapGet("/",() => new {message = "OK"});
 app.MapEndpoints();// metodo de extensão
 
 

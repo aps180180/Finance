@@ -1,6 +1,8 @@
 ﻿using Finance.Api.Common.Api;
 using Finance.Api.Endpoints.Categories;
+using Finance.Api.Endpoints.Identity;
 using Finance.Api.Endpoints.Transactions;
+using Finance.Api.Models;
 
 namespace Finance.Api.Endpoints
 {
@@ -11,22 +13,38 @@ namespace Finance.Api.Endpoints
             var endpoints = app
                 .MapGroup("");
 
+            endpoints.MapGroup("/")
+                .WithTags("Health Check")
+                .MapGet("/", () => new { message = "OK" });
+
             endpoints.MapGroup("v1/categories")
                 .WithTags("Categories")
-                //.RequireAuthorization()
+                .RequireAuthorization()
                 .MapEndpoint<CreateCategoryEndpoint>()
                 .MapEndpoint<UpdateCategoryEndpoint>()
                 .MapEndpoint<DeleteCategoryEndpoint>()
                 .MapEndpoint<GetCategoryByIdEndpoint>()
                 .MapEndpoint<GetAllCategoriesEndpoint>();
+            
             endpoints.MapGroup("v1/transactions")
                .WithTags("Transactions")
-               //.RequireAuthorization()
+               .RequireAuthorization()
                .MapEndpoint<CreateTransactionEndpoint>()
                .MapEndpoint<UpdateTransactionEndpoint>()
                .MapEndpoint<DeleteTransactionEndpoint>()
                .MapEndpoint<GetTransactionByIdEndpoint>()
                .MapEndpoint<GetTransactionsByPeriodEndpoint>();
+            
+            endpoints.MapGroup("v1/identity")
+               .WithTags("Identity")
+               .MapIdentityApi<User>();
+
+            
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapEndpoint<LogoutEndpoint>()
+               .MapEndpoint<GetRolesEndpoint>();
+              
 
 
 

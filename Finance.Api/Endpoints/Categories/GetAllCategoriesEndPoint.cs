@@ -5,6 +5,7 @@ using Finance.Core.Models;
 using Finance.Core.Requests.Categories;
 using Finance.Core.Responses;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Finance.Api.Endpoints.Categories
 {
@@ -21,11 +22,11 @@ namespace Finance.Api.Endpoints.Categories
 
         }
 
-        private static async Task<IResult> HandleAsync(ICategoryHandler handler,[FromQuery] int pageNumber=Configuration.DefaultPageNumber,[FromQuery] int pageSize=Configuration.DefaultPageSize )
+        private static async Task<IResult> HandleAsync(ClaimsPrincipal user ,ICategoryHandler handler,[FromQuery] int pageNumber=Configuration.DefaultPageNumber,[FromQuery] int pageSize=Configuration.DefaultPageSize )
         {
             var request = new GetAllCategoriesRequest
             {
-                UserId = "aps180180@gmail.com",
+                UserId = user.Identity?.Name ?? string.Empty,
                 PageNumber = pageNumber,
                 PageSize = pageSize 
             };
