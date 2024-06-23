@@ -5,9 +5,22 @@ using Finance.Core.Handlers;
 using Finance.Core.Models;
 using Finance.Core.Requests.Categories;
 using Finance.Core.Responses;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();//
+builder.Services.AddSwaggerGen(x =>
+{
+    x.CustomSchemaIds(n => n.FullName);
+}); //
+
+builder.Services
+    .AddAuthentication(IdentityConstants.ApplicationScheme)
+    .AddIdentityCookies();//
+builder.Services.AddAuthorization();//
+
 
 var connectionString = builder.Configuration.GetConnectionString("Default")?? string.Empty;
 builder.Services.AddDbContext<AppDbContext>(x =>
@@ -16,11 +29,6 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 });
 
 
-builder.Services.AddEndpointsApiExplorer();//
-builder.Services.AddSwaggerGen(x =>
-{
-    x.CustomSchemaIds(n => n.FullName);
-}); //
 
 builder.Services.AddTransient<ICategoryHandler,CategoryHandler>();//
 builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();//
