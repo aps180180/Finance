@@ -131,7 +131,7 @@ namespace Finance.Api.Handlers
                 transaction.Title = request.Title;
                 transaction.Type = request.Type;
                 transaction.PaidOrReceivedAt = request.PaidOrReceivedAt;
-                
+                transaction.CategoryId = request.CategoryId;
                 context.Transacitions.Update(transaction);
                 await context.SaveChangesAsync();  
                 

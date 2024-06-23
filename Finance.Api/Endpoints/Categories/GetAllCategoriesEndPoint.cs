@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Finance.Api.Endpoints.Categories
 {
-    public class GetAllCategoriesEndPoint :IEndpoint
+    public class GetAllCategoriesEndpoint :IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {

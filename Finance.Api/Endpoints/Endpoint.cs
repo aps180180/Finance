@@ -1,5 +1,6 @@
 ﻿using Finance.Api.Common.Api;
 using Finance.Api.Endpoints.Categories;
+using Finance.Api.Endpoints.Transactions;
 
 namespace Finance.Api.Endpoints
 {
@@ -17,8 +18,15 @@ namespace Finance.Api.Endpoints
                 .MapEndpoint<UpdateCategoryEndpoint>()
                 .MapEndpoint<DeleteCategoryEndpoint>()
                 .MapEndpoint<GetCategoryByIdEndpoint>()
-                .MapEndpoint<GetAllCategoriesEndPoint>();
-
+                .MapEndpoint<GetAllCategoriesEndpoint>();
+            endpoints.MapGroup("v1/transactions")
+               .WithTags("Transactions")
+               //.RequireAuthorization()
+               .MapEndpoint<CreateTransactionEndpoint>()
+               .MapEndpoint<UpdateTransactionEndpoint>()
+               .MapEndpoint<DeleteTransactionEndpoint>()
+               .MapEndpoint<GetTransactionByIdEndpoint>()
+               .MapEndpoint<GetTransactionsByPeriodEndpoint>();
 
 
 
