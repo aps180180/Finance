@@ -51,7 +51,7 @@ namespace Finance.Api.Handlers
 
         }
 
-        public async Task<PagedResponse<List<Category>>> GetAllAsync(GetAllCategoriesRequest request)
+        public async Task<PagedResponse<List<Category>?>> GetAllAsync(GetAllCategoriesRequest request)
         {
             try
             {
@@ -66,12 +66,12 @@ namespace Finance.Api.Handlers
                     .ToListAsync();
 
                 var count = await query.CountAsync();
-                return new PagedResponse<List<Category>>(categories, count, request.PageNumber, request.PageSize);
+                return new PagedResponse<List<Category>?>(categories, count, request.PageNumber, request.PageSize);
             }
             catch 
             {
 
-                return new PagedResponse<List<Category>>(null, 500, "Ocorreu um erro ao Listar as Categorias");    
+                return new PagedResponse<List<Category>?>(null, 500, "Ocorreu um erro ao Listar as Categorias");    
             }   
         }
 

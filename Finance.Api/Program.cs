@@ -1,6 +1,7 @@
 using Finance.Api.Data;
 using Finance.Api.Endpoints;
 using Finance.Api.Handlers;
+using Finance.Api.Models;
 using Finance.Core.Handlers;
 using Finance.Core.Models;
 using Finance.Core.Requests.Categories;
@@ -28,6 +29,12 @@ builder.Services.AddDbContext<AppDbContext>(x =>
     x.UseSqlServer(connectionString);   
 });
 
+builder.Services
+    .AddIdentityCore<User>()
+    .AddRoles<IdentityRole<long>>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddApiEndpoints();   // 
+    
 
 
 builder.Services.AddTransient<ICategoryHandler,CategoryHandler>();//
@@ -35,6 +42,9 @@ builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();//
 
 
 var app = builder.Build();
+
+app.UseAuthentication(); //
+app.UseAuthorization(); //
 
 app.UseSwagger();//
 app.UseSwaggerUI();//
