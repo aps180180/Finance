@@ -5,6 +5,9 @@ namespace Finance.Web
 {
     public static class Configuration
     {
+        public const string HttpClientName = "finance";
+        public static string BackendUrl { get; set; } = "https://localhost:7089";
+
         public static MudTheme Theme = new MudTheme()
         {
             Typography = new Typography
