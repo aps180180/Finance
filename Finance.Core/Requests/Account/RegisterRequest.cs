@@ -2,7 +2,7 @@
 
 namespace Finance.Core.Requests.Account
 {
-    public class RegisterRequest : Request
+    public class RegisterRequest  :Request
     {
         [Required(ErrorMessage ="Informe o e-mail")]
         [EmailAddress(ErrorMessage ="Informe um e-mail válido")]

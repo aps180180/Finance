@@ -1,0 +1,19 @@
+﻿@page "/sair"
+@layout HeadlessLayout
+@inherits LogoutPage
+
+<PageTitle>Finance - Sair </PageTitle>
+<MudText Typo="Typo.h3"> Finalizando a Sessão...</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <div class="d-flex justify-center pb-8 pt-8">
+        <img src="imgs/finance.png" alt="Finance  - 2024" width="300">
+    </div>
+    <MudAlert Severity="Severity.Info">
+        <div>
+            Sessão finalizada
+            <MudButton Variant="Variant.Text" Href="/login">
+                Ir para tela de login
+            </MudButton>
+        </div>   
+    </MudAlert>
+</MudPaper>
