@@ -36,8 +36,9 @@ namespace Finance.Web
             {
                 Primary = Colors.LightGreen.Accent3,
                 Secondary = Colors.LightGreen.Darken3,
-                AppbarBackground = Colors.LightGreen.Accent3,
-                AppbarText = Colors.Shades.Black
+                AppbarBackground = Colors.DeepPurple.Accent3,
+                AppbarText = Colors.Shades.Black,
+                PrimaryContrastText = new MudColor("#000000"),
             }
 
         };

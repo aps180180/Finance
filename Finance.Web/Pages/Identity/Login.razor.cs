@@ -51,7 +51,6 @@ namespace Finance.Web.Pages.Identity
 
                     await AuthenticationStateProvider.GetAuthenticationStateAsync();
                     AuthenticationStateProvider.NotifyAuthenticationStateChanged();
-
                     NavigationManager.NavigateTo("/");
 
                 }
