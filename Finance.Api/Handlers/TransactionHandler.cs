@@ -1,11 +1,11 @@
 ﻿using Finance.Api.Data;
 using Finance.Core.Common.Extensions;
+using Finance.Core.Enums;
 using Finance.Core.Handlers;
 using Finance.Core.Models;
 using Finance.Core.Requests.Transactions;
 using Finance.Core.Responses;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.Json;
 
 namespace Finance.Api.Handlers
 {
@@ -13,6 +13,11 @@ namespace Finance.Api.Handlers
     {
         public async Task<Response<Transaction?>> CreateAsync(CreateTransactionRequest request)
         {
+            if(request.Amount >=0 && request.Type == ETransactionType.Saida)
+            {
+                request.Amount *= -1;
+            }
+
             try
             {
                 var transaction = new Transaction
@@ -97,9 +102,9 @@ namespace Finance.Api.Handlers
                 var query = context
                .Transacitions
                .AsNoTracking()
-               .Where(x => x.CreatedAt >= request.StartDate && x.CreatedAt
+               .Where(x => x.PaidOrReceivedAt >= request.StartDate && x.PaidOrReceivedAt
                         <= request.EndDate && x.UserId == request.UserId)
-               .OrderBy(x => x.CreatedAt);
+               .OrderBy(x => x.PaidOrReceivedAt);
 
                 var transactions = await query
                        .Skip((request.PageNumber - 1) * request.PageNumber)
@@ -119,6 +124,10 @@ namespace Finance.Api.Handlers
 
         public async Task<Response<Transaction?>> UpdateAsync(UpdateTransactionRequest request)
         {
+            if (request.Amount >= 0 && request.Type == ETransactionType.Saida)
+            {
+                request.Amount *= -1;
+            }
 
             try
             {

@@ -6,6 +6,7 @@ using Finance.Web.Security;
 using Microsoft.AspNetCore.Components.Authorization;
 using Finance.Core.Handlers;
 using Finance.Web.Handlers;
+using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl")?? string.Empty ;
@@ -29,5 +30,10 @@ builder.Services.AddTransient<IAccountHandler, AccountHandler>();//
 builder.Services.AddTransient<ICategoryHandler, CategoryHandler>();//
 builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();//
 
+builder.Services.AddLocalization();
+CultureInfo.DefaultThreadCurrentCulture
+    = new System.Globalization.CultureInfo("pt-BR");
+CultureInfo.DefaultThreadCurrentUICulture
+    = new System.Globalization.CultureInfo("pt-BR");
 
 await builder.Build().RunAsync();

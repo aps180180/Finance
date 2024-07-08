@@ -1,0 +1,50 @@
+﻿@page "/lancamentos/add"
+
+@inherits CreateTransactionPage
+
+<MudText Typo="Typo.h3">Novo Lançamento</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+        <MudTextField T="string"
+                      Label="Título"
+                      HelperText="Campo obrigatório"
+                      @bind-Value="InputModel.Title"
+                      For="@(()=> InputModel.Title)" />
+        <MudTextField T="decimal"
+                      Format="C"
+                      Variant="Variant.Text"
+                      Label="Valor"
+                      HelperText="Informe o valor pago ou recebido"
+                      @bind-Value="InputModel.Amount"
+                      For="@(()=> InputModel.Amount)" />
+        <MudDatePicker Label="Data"
+                       @bind-Date="InputModel.PaidOrReceivedAt"
+                       HelperText="Data de Pagto ou Recebimento" />
+        <MudSelect T="ETransactionType"
+                   Label="Tipo do Lançamento"
+                   AnchorOrigin="Origin.BottomCenter"
+                   @bind-Value="InputModel.Type">
+            <MudSelectItem T="ETransactionType" Value="ETransactionType.Entrada">Entrada</MudSelectItem>
+            <MudSelectItem T="ETransactionType" Value="ETransactionType.Saida">Saída</MudSelectItem>
+        </MudSelect>
+        <MudSelect T="long"
+                   Label="Categoria"
+                   @bind-Value="InputModel.CategoryId"
+                   AnchorOrigin="Origin.BottomCenter">
+            @foreach (var category in Categories)
+            {
+                <MudSelectItem T="long" Value="@category.Id">
+                    @category.Title
+                </MudSelectItem>
+            }
+
+        </MudSelect>
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="mt-4">
+            Gravar
+        </MudButton>
+    </EditForm>
+</MudPaper>

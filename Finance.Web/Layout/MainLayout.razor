@@ -5,7 +5,7 @@
                   Theme="Configuration.Theme" />
 <MudSnackbarProvider />
 
-<MudDialogProvider/>
+<MudDialogProvider />
 <AuthorizeView>
     <Authorized>
         <MudLayout>
@@ -16,6 +16,12 @@
                                OnClick="()=>ToggleDrawer() " />
                 Finance
                 <MudSpacer />
+                <MudButton Href="/lancamentos/add"
+                           Variant="Variant.Text" StartIcon="@Icons.TwoTone.Add">
+                    Novo Lançamento
+                </MudButton>
+                <MudSpacer />
+
                 <MudText Typo="Typo.caption">
                     @context.User.Identity?.Name
                 </MudText>
@@ -23,11 +29,10 @@
                            T="bool"
                            @bind-Value="@_isDarkMode"
                            Class="ma-4"
-                           ThumbIcon="@Icons.TwoTone.Lightbulb"
-                           />
+                           ThumbIcon="@Icons.TwoTone.Lightbulb" />
             </MudAppBar>
             <MudDrawer @bind-Open="@_isDrawerOpened">
-                <NavMenu/>
+                <NavMenu />
             </MudDrawer>
             <MudMainContent>
                 <MudContainer Class="mt-4">

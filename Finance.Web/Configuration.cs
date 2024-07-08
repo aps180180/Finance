@@ -20,14 +20,15 @@ namespace Finance.Web
             Palette = new PaletteLight
             {
                 Primary = new MudColor("#004aad"),
-                Secondary = new MudColor("#00347a"),
+                Secondary = new MudColor("#FFFFFF"),
                 Background = new MudColor("#fefefe"),
                 AppbarBackground = new MudColor("#004aad"),
-                AppbarText = new MudColor("#000000"),
+                AppbarText = new MudColor("#FFFFFF"),
                 TextPrimary = new MudColor("#000000"),
-                PrimaryContrastText = new MudColor("#fefefe"),
-                DrawerText = new MudColor("#000000"),
-                DrawerBackground = new MudColor("#004aad")
+                PrimaryContrastText = new MudColor("#FFFFFF"),
+                DrawerText = new MudColor("#FFFFFF"),
+                DrawerBackground = new MudColor("#004aad"),
+               
 
 
 

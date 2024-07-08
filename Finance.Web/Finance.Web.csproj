@@ -5,7 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+	  <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>  
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Transactions\MudPaper.razor" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.5" />
@@ -24,7 +29,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Transactions\" />
+    <_ContentIncludedByDefault Remove="Pages\Transactions\MudPaper.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Transactions\MudPaper.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Transactions\MudPaper.razor" />
   </ItemGroup>
 
 </Project>

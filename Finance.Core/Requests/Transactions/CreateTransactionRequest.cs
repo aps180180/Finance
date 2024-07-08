@@ -13,7 +13,7 @@ namespace Finance.Core.Requests.Transactions
         [Required(ErrorMessage ="Título Inválido")]
         public string Title { get; set; } = string.Empty;
         [Required(ErrorMessage = "Tipo Inválido")]
-        public ETransactionType Type { get; set; }
+        public ETransactionType Type { get; set; } = ETransactionType.Saida;
         [Required(ErrorMessage = "Valor Inválido")]
         public   Decimal Amount { get; set; }
         [Required(ErrorMessage = "Categoria Inválida")]
