@@ -1,9 +1,10 @@
-﻿@page "/lancamentos/add"
+﻿
+@page "/lancamentos/add"
 
 @inherits CreateTransactionPage
 
 <MudText Typo="Typo.h3">Novo Lançamento</MudText>
-<MudPaper Class="pa-8 mt-4">
+<Mudblazor.MudPaper Class="pa-8 mt-4">
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
         <MudTextField T="string"
@@ -47,4 +48,4 @@
             Gravar
         </MudButton>
     </EditForm>
-</MudPaper>
+</MudBlazor.MudPaper>

@@ -7,7 +7,7 @@ using MudBlazor;
 
 namespace Finance.Web.Pages.Transactions
 {
-    public partial class CreateTransactionPage : ComponentBase
+    public partial class CreateTransactionPage :ComponentBase
     {
         #region Properties
         public bool IsBusy { get; set; }

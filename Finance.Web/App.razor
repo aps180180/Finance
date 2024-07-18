@@ -1,4 +1,4 @@
-﻿
+﻿@inject NavigationManager NavigationManager
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
@@ -11,11 +11,14 @@
             @*  <FocusOnNavigate RouteData="@routeData" Selector="h1" /> *@
         </Found>
         <NotFound>
-            <PageTitle>Not found</PageTitle>
+            @{
+                NavigationManager.NavigateTo("/");
+            }
+            @* <PageTitle>Not found</PageTitle>
             <LayoutView Layout="@typeof(MainLayout)">
                 <h1> Erro 404</h1>
                 <p>Página não encontrada</p>
-            </LayoutView>
+            </LayoutView> *@
         </NotFound>
     </Router>
 

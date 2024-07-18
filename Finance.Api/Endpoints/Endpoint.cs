@@ -1,6 +1,7 @@
 ﻿using Finance.Api.Common.Api;
 using Finance.Api.Endpoints.Categories;
 using Finance.Api.Endpoints.Identity;
+using Finance.Api.Endpoints.Reports;
 using Finance.Api.Endpoints.Transactions;
 using Finance.Api.Models;
 
@@ -44,7 +45,19 @@ namespace Finance.Api.Endpoints
                 .WithTags("Identity")
                 .MapEndpoint<LogoutEndpoint>()
                .MapEndpoint<GetRolesEndpoint>();
-              
+
+            endpoints.MapGroup("/v1/reports")
+                .WithTags("Reports")
+                .RequireAuthorization()
+                .MapEndpoint<GetExpensesByCategoryEndpoint>()
+                .MapEndpoint<GetIncomesByCategoryEndpoint>()
+                .MapEndpoint<GetIncomesAndExpensesEndpoint>()
+                .MapEndpoint<GetFinancialSummaryEndpoint>();
+
+
+
+
+
 
 
 

@@ -42,6 +42,6 @@ namespace Finance.Api.Data
                 .ToView("vwGetExpensesByCategory");
         }
     }
-    }
-    }
+    
+    
 }
