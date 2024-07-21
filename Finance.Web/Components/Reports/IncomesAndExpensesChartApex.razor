@@ -1,0 +1,31 @@
+﻿@using ApexCharts
+@inherits IncomesAndExpensesChartApexComponent
+
+@if (Data.Count > 0)
+{
+    <ApexChart TItem="MyData"
+               Height="300"
+               Title="">
+
+        <ApexPointSeries TItem="MyData"
+                         Items="Data"
+                         Name="Receitas"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Category)"
+                         YAggregate="@(e => e.Sum(e => e.Incomes))" />
+
+        <ApexPointSeries TItem="MyData"
+                         Items="Data"
+                         Name="Despesas"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Category)"
+                         YAggregate="@(e => e.Sum(e => e.Expenses))" />
+    </ApexChart>
+
+}
+else
+{
+    <div class="d-flex align-center justify-center" style="height:300px">
+        <MudProgressCircular Indeterminate="true" />
+    </div>
+}

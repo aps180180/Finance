@@ -1,0 +1,24 @@
+﻿@using ApexCharts
+@inherits IncomesByCategoryChartApexComponent
+@if (Data.Count > 0)
+{
+    <ApexChart TItem="MyData" Height="300"
+               Title="" Options="Options" FormatYAxisLabel="GetYAxisLabel" >
+
+        <ApexPointSeries TItem="MyData"
+                         Items="Data"
+                         Name="Despesas"
+                         SeriesType="SeriesType.Donut"
+                         XValue="@(e => e.Category)"
+                         YAggregate="@(e => e.Sum(e => e.Incomes))"
+                         OrderByDescending="e=>e.Y" />
+    </ApexChart>
+}
+
+
+else
+{
+    <div class="d-flex align-center justify-center" style="height:150px">
+        <MudProgressCircular Indeterminate="true"  />
+    </div>
+}

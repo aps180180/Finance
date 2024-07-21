@@ -1,7 +1,9 @@
 ﻿@inherits LayoutComponentBase
 
+
 <MudThemeProvider @ref="_mudThemeProvider"
                   @bind-IsDarkMode="_isDarkMode"
+                 
                   Theme="Configuration.Theme" />
 <MudSnackbarProvider />
 
@@ -17,7 +19,7 @@
                 Finance
                 <MudSpacer />
                 <MudButton Href="/lancamentos/add"
-                           Variant="Variant.Text" StartIcon="@Icons.TwoTone.Add">
+                           Variant="Variant.Filled" StartIcon="@Icons.TwoTone.Add" >
                     Novo Lançamento
                 </MudButton>
                 <MudSpacer />
@@ -25,11 +27,11 @@
                 <MudText Typo="Typo.caption">
                     @context.User.Identity?.Name
                 </MudText>
-                <MudSwitch Color="Color.Inherit"
+                @* <MudSwitch Color="Color.Inherit"
                            T="bool"
                            @bind-Value="@_isDarkMode"
                            Class="ma-4"
-                           ThumbIcon="@Icons.TwoTone.Lightbulb" />
+                           ThumbIcon="@Icons.TwoTone.Lightbulb" /> *@
             </MudAppBar>
             <MudDrawer @bind-Open="@_isDrawerOpened">
                 <NavMenu />
@@ -49,15 +51,17 @@
 
 @code {
     private bool _isDrawerOpened = true;
-    private bool _isDarkMode = true;
+    private bool _isDarkMode = false;
     private MudThemeProvider _mudThemeProvider = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
-            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            //_isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            //await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+           
+            
             StateHasChanged();
         }
     }
@@ -72,4 +76,6 @@
     {
         _isDrawerOpened = !_isDrawerOpened;
     }
+
+    
 }

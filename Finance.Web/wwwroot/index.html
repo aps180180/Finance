@@ -37,6 +37,14 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script>
+        function getFromLocalStorage(key) {
+            return localStorage.getItem(key);
+        }
+        function setFromLocalStorage(key) {
+            return localStorage.setItem(key);
+        }
+    </script>
 
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>

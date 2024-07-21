@@ -9,9 +9,14 @@ namespace Finance.Web.Pages
     public partial class HomePage :ComponentBase
     {
         #region Properties
-
         public bool ShowValues { get; set; } = true;
         public FinancialSummary? Summary { get; set; }
+        #endregion
+
+        #region Methods
+
+        public void ToggleShowValues()
+            => ShowValues = !ShowValues;
 
         #endregion
 
@@ -34,13 +39,6 @@ namespace Finance.Web.Pages
             if (result.IsSuccess)
                 Summary = result.Data;
         }
-
-        #endregion
-
-        #region Methods
-
-        public void ToggleShowValues()
-            => ShowValues = !ShowValues;
 
         #endregion
     }
