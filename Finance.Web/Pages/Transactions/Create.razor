@@ -4,7 +4,7 @@
 @inherits CreateTransactionPage
 
 <MudText Typo="Typo.h3">Novo Lançamento</MudText>
-<Mudblazor.MudPaper Class="pa-8 mt-4">
+<MudPaper Class="pa-8 mt-4">
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
         <MudTextField T="string"
@@ -48,4 +48,4 @@
             Gravar
         </MudButton>
     </EditForm>
-</MudBlazor.MudPaper>
+</MudPaper>

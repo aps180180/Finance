@@ -5,7 +5,7 @@
 <div class="d-flex justify-end">
     <MudButton Variant="Variant.Filled"
                Color="Color.Primary"
-               StartIcon="@Icons.TwoTone.Add"
+               StartIcon="@Icons.Material.TwoTone.Add"
                Href="/categorias/add">
         Nova categoria
     </MudButton>
@@ -16,8 +16,10 @@
 </div>
 <MudDataGrid Items="@Categories"
              Class="mt-4"
-             Filterable="true"
+             
+             Filterable="false"
              QuickFilter="Filter"
+             FixedHeader="true"
              Hideable="true">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Categorias</MudText>
@@ -32,9 +34,9 @@
     <Columns>
         <PropertyColumn Property="x=> x.Id" Title="#" />
         <PropertyColumn Property="x=> x.Title" Title="Categoria" />
-        <TemplateColumn Class="d-flex justify-end">
+        <TemplateColumn Filterable="true">
             <CellTemplate>
-                <MudStack Row>
+                <MudStack Row Justify="Justify.FlexEnd">
                     <MudIconButton Icon="@Icons.Material.Filled.Edit"
                                    Href="@($"/categorias/edit/{context.Item.Id}")"
                                    Color="Color.Primary">
@@ -53,4 +55,7 @@
             </CellTemplate>
         </TemplateColumn>
     </Columns>
+    <PagerContent>
+        <MudDataGridPager RowsPerPageString="Registros por página" InfoFormat="{first_item}/{last_item} de {all_items} "  />
+    </PagerContent>
 </MudDataGrid>

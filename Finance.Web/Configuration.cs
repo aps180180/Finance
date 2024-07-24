@@ -17,7 +17,8 @@ namespace Finance.Web
                     FontFamily = ["League Spartan", "sans-serif"]
                 }
             },
-            Palette = new PaletteLight
+            
+            PaletteLight = new PaletteLight
             {
                 Primary = new MudColor("#004aad"),
                 Secondary = new MudColor("#FFFFFF"),

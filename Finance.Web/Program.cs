@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Finance.Core.Handlers;
 using Finance.Web.Handlers;
 using System.Globalization;
+using MudBlazor.Translations;
+using MudBlazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl")?? string.Empty ;
@@ -21,6 +23,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStat
 builder.Services.AddScoped(x=>(ICookieAuthenticationStateProvider) x.GetRequiredService<AuthenticationStateProvider>());
 
 builder.Services.AddMudServices();
+//builder.Services.AddMudTranslations();
+//builder.Services.AddTransient<MudLocalizer, CustomMudLocalizerImpl>();
 builder.Services.AddHttpClient(Configuration.HttpClientName, opt => {
     opt.BaseAddress = new Uri(Configuration.BackendUrl);
          

@@ -1,4 +1,5 @@
 ﻿@page "/lancamentos/historico"
+@using System.Globalization
 
 @inherits ListTransactionsPage
 
@@ -32,15 +33,17 @@
     <MudButton Variant="Variant.Filled"
                Color="Color.Primary"
                Size="Size.Small"
-               StartIcon="@Icons.TwoTone.Search" OnClick="OnSearchAsync">
+               StartIcon="@Icons.Material.TwoTone.Search" OnClick="OnSearchAsync">
         Pesquisar
     </MudButton>
 </div>
 <MudDataGrid Items="@Transactions"
-             Filterable="true"
+             Culture="@(new CultureInfo("pt-BR"))"
+             Filterable="false"
              QuickFilter="Filter"
              Hideable="false"
-             ColumnResizeMode="ResizeMode.Column">
+             FixedHeader = "true"
+             >
     <ToolBarContent>
         <MudText Typo="Typo.h6">Lançamentos</MudText>
         <MudSpacer />
@@ -55,7 +58,7 @@
     <Columns>
         <PropertyColumn Property="x=> x.Id" Title="Nº Lancto" />
 
-        <PropertyColumn Property="x=> x.PaidOrReceivedAt" Title="Dt. Pagto/Receb." Format="dd/MM/yyyy" Filterable="false" />
+        <PropertyColumn Property="x=> x.PaidOrReceivedAt" Title="Dt. Pagto/Receb." Format="dd/MM/yyyy" Filterable="true" />
         <PropertyColumn Property="x=> x.Title" Title="Lançamento" Filterable="false" />
         <TemplateColumn Title="Tipo" Filterable="true">
             <CellTemplate>
@@ -82,9 +85,9 @@
                 @context.Items.Sum(x => x.Amount).ToString("C")
             </FooterTemplate>
         </PropertyColumn>
-        <TemplateColumn Class="d-flex justfy-end" Filterable="false">
+        <TemplateColumn  Filterable="true">
             <CellTemplate>
-                <MudStack Row>
+                <MudStack Row Justify="Justify.FlexEnd">
                     <MudIconButton Icon="@Icons.Material.Filled.Edit"
                                    Color="Color.Primary" Href="@($"/lancamentos/editar/{context.Item.Id}")">
                     </MudIconButton>
@@ -96,4 +99,7 @@
             </CellTemplate>
         </TemplateColumn>
     </Columns>
+    <PagerContent>
+        <MudDataGridPager RowsPerPageString="Registros por página" InfoFormat="{first_item}/{last_item} de {all_items}"  />
+    </PagerContent>
 </MudDataGrid>

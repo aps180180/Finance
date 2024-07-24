@@ -6,7 +6,7 @@
                  
                   Theme="Configuration.Theme" />
 <MudSnackbarProvider />
-
+<MudPopoverProvider />
 <MudDialogProvider />
 <AuthorizeView>
     <Authorized>
@@ -19,7 +19,7 @@
                 Finance
                 <MudSpacer />
                 <MudButton Href="/lancamentos/add"
-                           Variant="Variant.Filled" StartIcon="@Icons.TwoTone.Add" >
+                           Variant="Variant.Filled" StartIcon="@Icons.Material.TwoTone.Add" >
                     Novo Lançamento
                 </MudButton>
                 <MudSpacer />
@@ -37,7 +37,7 @@
                 <NavMenu />
             </MudDrawer>
             <MudMainContent>
-                <MudContainer Class="mt-4">
+                <MudContainer Class="mt-4" Fixed="false">
                     @Body
                 </MudContainer>
             </MudMainContent>
