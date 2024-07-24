@@ -23,8 +23,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStat
 builder.Services.AddScoped(x=>(ICookieAuthenticationStateProvider) x.GetRequiredService<AuthenticationStateProvider>());
 
 builder.Services.AddMudServices();
-//builder.Services.AddMudTranslations();
-//builder.Services.AddTransient<MudLocalizer, CustomMudLocalizerImpl>();
+builder.Services.AddMudTranslations();
+builder.Services.AddTransient<MudLocalizer, CustomMudLocalizerImpl>();
 builder.Services.AddHttpClient(Configuration.HttpClientName, opt => {
     opt.BaseAddress = new Uri(Configuration.BackendUrl);
          
